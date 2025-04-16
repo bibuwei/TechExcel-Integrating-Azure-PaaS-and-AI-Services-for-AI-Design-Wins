@@ -58,7 +58,7 @@ resource functionApp 'Microsoft.Web/sites@2022-03-01' = {
         }
         {
           name: 'AzureOpenAIEndpoint'
-          value: openAiProps.endpoint
+          value: 'https://openaihack11113.openai.azure.com/'
         }        
         {
           name: 'CosmosDBConnection__accountEndpoint'

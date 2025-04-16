@@ -93,7 +93,6 @@ var userManagedIdentityName = '${abbrs.managedIdentityUserAssignedIdentities}${r
 var apiManagementServiceName = '${abbrs.apiManagementService}${resourceToken}'
 var storageAccountName = '${abbrs.storageStorageAccounts}${resourceToken}'
 var searchServiceName = '${abbrs.searchSearchServices}${resourceToken}'
-var openAIName = 'openai-${resourceToken}'
 var speechServiceName = '${abbrs.cognitiveServicesSpeech}${resourceToken}'
 var languageServiceName = '${abbrs.cognitiveServicesTextAnalytics}${resourceToken}'
 var registryName = '${abbrs.containerRegistryRegistries}${resourceToken}'
@@ -156,14 +155,12 @@ module ai 'app/ai.bicep' = {
   scope: rg
   name: 'ai'
   params: {
-    tags: tags
     restore: restore
-    openAIName: openAIName
     speechServiceName: speechServiceName
     languageServiceName: languageServiceName
     searchServiceName: searchServiceName
-    deployments: deployments
     managedIdentityName: userManagedIdentity.outputs.name
+
   }
 }
 
@@ -181,7 +178,7 @@ module webapps 'app/webapps.bicep' = {
     webAppNameDash: webAppNameDash
     managedIdentityName: userManagedIdentity.outputs.name
     openAiProps: {
-      endpoint: ai.outputs.openAIEndpoint
+      endpoint: 'https://openaihack11113.openai.azure.com/'
       deploymentName: 'gpt-4o'
       embeddingDeploymentName: 'text-embedding-ada-002'
     }
@@ -201,7 +198,7 @@ module functionapp 'app/functionapp.bicep' = {
     functionAppName: functionAppName
     functionAppServicePlanName: functionAppServicePlanName
     openAiProps: {
-      endpoint: ai.outputs.openAIEndpoint
+      endpoint: 'https://openaihack11113.openai.azure.com/'
       deploymentName: 'gpt-4o'
       embeddingDeploymentName: 'text-embedding-ada-002'
     }
@@ -314,7 +311,6 @@ module openAiUserRoleManagedIdentity 'core/security/role.bicep' = {
 output cosmosDbEndpoint string = database.outputs.cosmos.dbEndpoint
 output storageAccountName string = storageAccount.name
 output searchServiceName string = ai.outputs.searchServiceName
-output openAIEndpoint string = ai.outputs.openAIEndpoint
 output speechServiceName string = ai.outputs.speechServiceName
 output application_name string = webapps.outputs.webapi.name
 output application_url string = webapps.outputs.webapi.url

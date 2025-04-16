@@ -101,9 +101,6 @@ output containerRegistryEndpoint string = hubDependencies.outputs.containerRegis
 // Storage Account
 output storageAccountName string = hubDependencies.outputs.storageAccountName
 
-// Open AI
-output openAiName string = hubDependencies.outputs.openAiName
-output openAiEndpoint string = hubDependencies.outputs.openAiEndpoint
 
 // Search
 output searchServiceName string = hubDependencies.outputs.searchServiceName

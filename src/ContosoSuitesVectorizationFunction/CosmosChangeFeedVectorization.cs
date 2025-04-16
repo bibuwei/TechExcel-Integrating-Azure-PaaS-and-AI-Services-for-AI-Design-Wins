@@ -27,7 +27,7 @@ namespace ContosoSuites.Functions
         /// <exception cref="ArgumentNullException">Thrown if necessary configuration settings are missing.</exception>
         public CosmosChangeFeedVectorization(ILoggerFactory loggerFactory)
         {
-            var endpointUrl = Environment.GetEnvironmentVariable("AzureOpenAIEndpoint");
+            var endpointUrl = "https://openaihack11113.openai.azure.com/";
             if (string.IsNullOrEmpty(endpointUrl))
                 throw new ArgumentNullException("AzureOpenAIEndpoint", "AzureOpenAIEndpoint is required to run this function.");            
 

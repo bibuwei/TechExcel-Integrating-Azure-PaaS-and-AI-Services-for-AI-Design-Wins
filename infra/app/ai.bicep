@@ -1,8 +1,5 @@
 param location string = resourceGroup().location
-param deployments array
-param tags object = {}
 param restore bool = false
-param openAIName string
 param speechServiceName string
 param languageServiceName string
 param searchServiceName string
@@ -21,16 +18,6 @@ module searchService '../core/search/search-services.bicep' = {
   }
 }
 
-@description('Creates an Azure OpenAI resource.')
-module openAI '../core/ai/cognitiveservices.bicep' = {
-  name: openAIName
-  params: {
-    location: location
-    name: openAIName
-    deployments: deployments
-    tags: tags
-  }
-}
 
 @description('Creates an Azure AI Services Speech service.')
 resource speechService 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
@@ -63,7 +50,5 @@ resource languageService 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 }
 
 output searchServiceName string = searchService.outputs.name
-output openAIName string = openAI.outputs.name
-output openAIEndpoint string = openAI.outputs.endpoint
 output speechServiceName string = speechService.name
 output languageServiceName string = languageService.name
