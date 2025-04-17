@@ -1,6 +1,8 @@
 import streamlit as st
 from azure.cosmos import CosmosClient
 import openai
+# Explicitly import the token provider and credentials to ensure they're accessible
+from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 
 st.set_page_config(layout="wide")
 
